@@ -9,7 +9,15 @@ pnpm install
 pnpm dev
 ```
 
-Open `http://localhost:3000/` and inspect the `application/ld+json` script. The `WebSite` node contains a `workTranslation` array whose entries all point to `https://example.com/#website` — the current `WebSite` itself.
+Open `http://localhost:3000/` and inspect the `application/ld+json` script. The `WebSite` node contains a `workTranslation` pointing to `https://example.com/#website` — the current `WebSite` itself.
+
+To reproduce the non-default locale path, request the page with the locale cookie:
+
+```bash
+curl -H 'Cookie: i18n_redirected=fr' http://localhost:3000/
+```
+
+The `WebSite` node then contains a `translationOfWork` pointing to the same `https://example.com/#website`.
 
 ## Expected
 
